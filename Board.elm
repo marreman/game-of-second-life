@@ -36,16 +36,23 @@ create w h =
                 width
 
 
--- get : Position -> Board -> Maybe Cell
--- get position board =
---     Dict.get position board
-
 empty : Board
 empty =
     Dict.empty
+
 
 map f board =
     board
         |> Dict.map f
         |> Dict.toList
         |> List.map Tuple.second
+
+
+fromList : List ( Position, Cell ) -> Board
+fromList xs =
+    Dict.fromList xs
+
+
+merge : Board -> Board -> Board
+merge b1 b2 =
+    Dict.union b1 b2
