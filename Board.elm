@@ -40,6 +40,9 @@ create w h =
 -- get position board =
 --     Dict.get position board
 
+empty : Board
+empty =
+    Dict.empty
 
 map f board =
     board
