@@ -1,18 +1,7 @@
-module Board exposing (..)
+module Utils exposing (..)
 
 import Dict exposing (Dict)
-
-
-type alias Board =
-    Dict Position Cell
-
-
-type alias Position =
-    ( Int, Int )
-
-
-type alias Cell =
-    { isAlive : Bool }
+import Types exposing (..)
 
 
 create : Int -> Int -> Board
