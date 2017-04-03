@@ -25,7 +25,7 @@ main =
 init : ( Model, Cmd Msg )
 init =
     ( { board = Game.Board.empty
-      , cellSize = 50
+      , cellSize = 40
       , windowSize = Window.Size 0 0
       , seed = ""
       , started = False
@@ -40,11 +40,14 @@ update msg model =
 
 
 subscriptions : Model -> Sub Msg
-subscriptions _ =
-    Sub.batch
-        [ Mouse.clicks Click
-        , Time.every Time.second Tick
-        ]
+subscriptions model =
+    if model.started then
+        Sub.batch
+            [ Mouse.clicks Click
+            , Time.every (Time.millisecond * 250) Tick
+            ]
+    else
+        Mouse.clicks Click
 
 
 view : Model -> Html Msg

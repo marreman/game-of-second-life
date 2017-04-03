@@ -13,7 +13,7 @@ update msg model =
             { model | board = evolve model.board }
 
         StartStop ->
-            { model | started = True }
+            { model | started = not model.started }
 
         UpdateSeed seed ->
             { model | seed = seed }
