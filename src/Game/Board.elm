@@ -30,25 +30,13 @@ empty =
     Dict.empty
 
 
-map f board =
-    board
-        |> Dict.map f
-        |> Dict.toList
-        |> List.map Tuple.second
-
-
-fromList : List ( Position, Cell ) -> Board
-fromList xs =
-    Dict.fromList xs
-
-
 merge : Board -> Board -> Board
 merge b1 b2 =
     Dict.union b1 b2
 
 
-update : Position -> Board -> Board
-update position board =
+flip : Position -> Board -> Board
+flip position board =
     let
         updateCell cell =
             { cell | isAlive = not cell.isAlive }

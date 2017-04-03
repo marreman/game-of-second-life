@@ -3,6 +3,7 @@ module Game.Types exposing (..)
 import Mouse
 import Dict exposing (Dict)
 import Window exposing (Size)
+import Time exposing (Time)
 
 
 type alias Model =
@@ -32,3 +33,4 @@ type Msg
     | ParseSeed
     | Click Mouse.Position
     | StartStop
+    | Tick Time
