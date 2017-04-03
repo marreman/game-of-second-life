@@ -1,4 +1,4 @@
-module Types exposing (..)
+module Game.Types exposing (..)
 
 import Mouse
 import Dict exposing (Dict)

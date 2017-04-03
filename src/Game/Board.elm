@@ -1,7 +1,7 @@
-module Utils exposing (..)
+module Game.Board exposing (..)
 
 import Dict exposing (Dict)
-import Types exposing (..)
+import Game.Types exposing (..)
 
 
 create : Int -> Int -> Board

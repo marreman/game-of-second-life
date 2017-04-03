@@ -1,12 +1,14 @@
 module Main exposing (..)
 
 import Html exposing (Html)
+import Html.Attributes exposing (class)
+import Html.Events exposing (onClick, onInput)
 import Mouse
 import Task
-import Types exposing (..)
-import Update exposing (update)
-import Utils
-import View exposing (view)
+import Game.Board
+import Game.Types exposing (..)
+import Game.Update exposing (update)
+import Game.View
 import Window
 
 
@@ -21,7 +23,7 @@ main =
 
 init : ( Model, Cmd Msg )
 init =
-    ( { board = Utils.empty
+    ( { board = Game.Board.empty
       , cellSize = 50
       , windowSize = Window.Size 0 0
       , seed = """
@@ -36,3 +38,19 @@ init =
     , Task.perform NewWindowSize Window.size
     )
 
+
+view : Model -> Html Msg
+view model =
+    Html.div []
+        [ Game.View.view model
+        , viewControls
+        ]
+
+
+viewControls : Html Msg
+viewControls =
+    Html.div [ class "controls" ]
+        [ Html.input [ onInput UpdateSeed ] []
+        , Html.button [ onClick ParseSeed ] [ Html.text "Parse" ]
+        , Html.button [ onClick StartStop ] [ Html.text "Play" ]
+        ]

@@ -1,7 +1,8 @@
-module Update exposing (update)
+module Game.Update exposing (update)
 
-import Types exposing (..)
-import Utils
+import Game.Types exposing (..)
+import Game.Board as Board
+import Game.Parse as Parse
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -15,7 +16,7 @@ update msg model =
 
         ParseSeed ->
             { model
-                | board = Utils.merge (parse model.seed) model.board
+                | board = Board.merge (Parse.parse model.seed) model.board
             }
                 ! []
 
@@ -29,14 +30,14 @@ update msg model =
             in
                 { model
                     | windowSize = size
-                    , board = Utils.create cols rows
+                    , board = Board.create cols rows
                 }
                     ! []
 
         Click mousePosition ->
             let
                 newBoard =
-                    Utils.update position model.board
+                    Board.update position model.board
 
                 position =
                     ( round <| (x - ww / 2 + cs / 2) / cs - 1
@@ -59,38 +60,3 @@ update msg model =
                     toFloat mousePosition.y
             in
                 { model | board = newBoard } ! []
-
-
-parse : String -> Board
-parse seed =
-    seed
-        |> String.split "\n"
-        |> List.map String.trim
-        |> List.filter (\r -> not <| String.isEmpty r)
-        |> List.map parsePair
-        |> List.map (\pos -> ( pos, Cell True ))
-        |> Utils.fromList
-        |> Debug.log "root"
-
-
-parsePair : String -> Position
-parsePair pair =
-    let
-        toTuple xs =
-            case xs of
-                [ x, y ] ->
-                    ( x, y )
-
-                _ ->
-                    ( "0", "0" )
-
-        parseInt ( x, y ) =
-            ( String.toInt x |> Result.withDefault 0
-            , String.toInt y |> Result.withDefault 0
-            )
-    in
-        pair
-            |> String.split " "
-            |> toTuple
-            |> parseInt
-
