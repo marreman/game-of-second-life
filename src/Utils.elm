@@ -45,3 +45,12 @@ fromList xs =
 merge : Board -> Board -> Board
 merge b1 b2 =
     Dict.union b1 b2
+
+
+update : Position -> Board -> Board
+update position board =
+    let
+        updateCell cell =
+            { cell | isAlive = not cell.isAlive }
+    in
+        Dict.update position (Maybe.map updateCell) board

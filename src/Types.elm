@@ -1,7 +1,8 @@
 module Types exposing (..)
 
-import Window exposing (Size)
+import Mouse
 import Dict exposing (Dict)
+import Window exposing (Size)
 
 
 type alias Model =
@@ -28,3 +29,4 @@ type Msg
     = NewWindowSize Size
     | UpdateSeed String
     | ParseSeed
+    | Click Mouse.Position

@@ -3,6 +3,7 @@ module Update exposing (update)
 import Types exposing (..)
 import Utils
 
+
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
@@ -28,6 +29,33 @@ update msg model =
                     , board = Utils.create cols rows
                 }
                     ! []
+
+        Click mousePosition ->
+            let
+                newBoard =
+                    Utils.update position model.board
+
+                position =
+                    ( round <| (x - ww / 2 + cs / 2) / cs - 1
+                    , round <| (y - wh / 2 + cs / 2) / cs * -1
+                    )
+
+                ww =
+                    toFloat model.windowSize.width
+
+                wh =
+                    toFloat model.windowSize.height
+
+                cs =
+                    toFloat model.cellSize
+
+                x =
+                    toFloat mousePosition.x
+
+                y =
+                    toFloat mousePosition.y
+            in
+                { model | board = newBoard } ! []
 
 
 parse : String -> Board

@@ -12,8 +12,8 @@ import Types exposing (..)
 view : Model -> Html Msg
 view model =
     Html.div []
-        [ viewControls
-        , viewBoard model
+        -- [ viewControls
+        [ viewBoard model
         ]
 
 
@@ -49,7 +49,7 @@ viewCell model position cell =
             if cell.isAlive then
                 cellView
             else
-                alpha 0 cellView
+                alpha 0.5 cellView
     in
         square (toFloat (model.cellSize - 1))
             |> filled Color.blue

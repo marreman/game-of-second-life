@@ -1,19 +1,20 @@
 module Main exposing (..)
 
-import Task
 import Html exposing (Html)
-import Window
+import Mouse
+import Task
 import Types exposing (..)
 import Update exposing (update)
-import View exposing (view)
 import Utils
+import View exposing (view)
+import Window
 
 
 main =
     Html.program
         { init = init
         , update = update
-        , subscriptions = always Sub.none
+        , subscriptions = \_ -> Mouse.clicks Click
         , view = view
         }
 
@@ -21,7 +22,7 @@ main =
 init : ( Model, Cmd Msg )
 init =
     ( { board = Utils.empty
-      , cellSize = 80
+      , cellSize = 50
       , windowSize = Window.Size 0 0
       , seed = """
     0 -1
