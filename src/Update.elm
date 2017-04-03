@@ -7,6 +7,9 @@ import Utils
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        StartStop ->
+            { model | started = True } ! []
+
         UpdateSeed seed ->
             { model | seed = seed } ! []
 
@@ -90,3 +93,4 @@ parsePair pair =
             |> String.split " "
             |> toTuple
             |> parseInt
+

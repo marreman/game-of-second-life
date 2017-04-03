@@ -10,6 +10,7 @@ type alias Model =
     , cellSize : Int
     , windowSize : Size
     , seed : String
+    , started : Bool
     }
 
 
@@ -30,3 +31,4 @@ type Msg
     | UpdateSeed String
     | ParseSeed
     | Click Mouse.Position
+    | StartStop

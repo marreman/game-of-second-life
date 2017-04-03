@@ -23,6 +23,7 @@ viewControls =
     Html.div [ class "controls" ]
         [ Html.input [ onInput UpdateSeed ] []
         , Html.button [ onClick ParseSeed ] [ Html.text "Parse" ]
+        , Html.button [ onClick StartStop ] [ Html.text "Play" ]
         ]
 
 

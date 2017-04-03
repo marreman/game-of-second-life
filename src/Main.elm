@@ -31,6 +31,7 @@ init =
     0 1
     1 1
             """
+      , started = False
       }
     , Task.perform NewWindowSize Window.size
     )
