@@ -2,6 +2,7 @@ module View exposing (view)
 
 import Html exposing (Html)
 import Html.Events exposing (onInput, onClick)
+import Html.Attributes exposing (class)
 import Collage exposing (..)
 import Element
 import Color
@@ -12,14 +13,14 @@ import Types exposing (..)
 view : Model -> Html Msg
 view model =
     Html.div []
-        -- [ viewControls
         [ viewBoard model
+        , viewControls
         ]
 
 
 viewControls : Html Msg
 viewControls =
-    Html.div []
+    Html.div [ class "controls" ]
         [ Html.input [ onInput UpdateSeed ] []
         , Html.button [ onClick ParseSeed ] [ Html.text "Parse" ]
         ]
