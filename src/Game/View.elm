@@ -34,9 +34,9 @@ viewCell model position cell =
             if cell.isAlive then
                 cellView
             else
-                Collage.alpha 0.5 cellView
+                Collage.alpha 0.05 cellView
     in
         Collage.square (toFloat (model.cellSize - 1))
-            |> Collage.filled Color.blue
+            |> Collage.filled Color.white
             |> Collage.move (parse position)
             |> opacity

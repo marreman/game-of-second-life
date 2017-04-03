@@ -25,7 +25,7 @@ main =
 init : ( Model, Cmd Msg )
 init =
     ( { board = Game.Board.empty
-      , cellSize = 40
+      , cellSize = 20
       , windowSize = Window.Size 0 0
       , seed = ""
       , started = False
@@ -44,7 +44,7 @@ subscriptions model =
     if model.started then
         Sub.batch
             [ Mouse.clicks Click
-            , Time.every (Time.millisecond * 250) Tick
+            , Time.every (Time.second / 10) Tick
             ]
     else
         Mouse.clicks Click
@@ -54,14 +54,17 @@ view : Model -> Html Msg
 view model =
     Html.div []
         [ Game.View.view model
-        , viewControls
+        , viewControls model
         ]
 
 
-viewControls : Html Msg
-viewControls =
+viewControls : Model -> Html Msg
+viewControls model =
     Html.div [ class "controls" ]
-        [ Html.input [ onInput UpdateSeed ] []
-        , Html.button [ onClick ParseSeed ] [ Html.text "Parse" ]
-        , Html.button [ onClick StartStop ] [ Html.text "Play" ]
+        [ Html.button [ onClick StartStop ]
+            [ if model.started then
+                Html.text "■"
+              else
+                Html.text "▶"
+            ]
         ]
