@@ -8,6 +8,7 @@ import Color
 import Utils
 import Types exposing (..)
 
+
 view : Model -> Html Msg
 view model =
     Html.div []
@@ -43,8 +44,14 @@ viewCell model position cell =
             ( toFloat (x * model.cellSize + model.cellSize // 2)
             , toFloat (y * model.cellSize + model.cellSize // 2)
             )
+
+        opacity cellView =
+            if cell.isAlive then
+                cellView
+            else
+                alpha 0 cellView
     in
         square (toFloat (model.cellSize - 1))
             |> filled Color.blue
             |> move (parse position)
-            |> (\s -> if cell.isAlive then s else alpha 0 s)
+            |> opacity
